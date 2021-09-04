@@ -1,0 +1,320 @@
+:root{ /*ESTO (:NOMBRE) ES UN PSEUDOELEMENTO, NO EXISTE ESTA ETIQUETA
+        :root SERÍA UN CUSTOM PROPERTY (DEFINIR PROPIEDADES)*/
+    --blanco: #ffffff;
+    --oscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --grisaceo: #757575;
+    --grisClaro: #DFE9F3;
+}
+/** GLOBAL **/
+html{
+    font-size: 62.5%;
+    scroll-snap-type: y mandatory;
+    box-sizing: border-box; /* HACK PARA BOX MODEL 
+    - REQUISITO PARA QUE LOS PADDING NO MODIFIQUEN EL CONTENEDOR*/
+}
+
+*, *:before, *:after { /*EL ASTERISO HACE REFERENCIA A TODOS LOS ELEMENTOS
+COMO :BEFORE Y :AFTER SON PSEUDOELEMENTOS (css no html) NO LOS CONTEMPLA
+*/ 
+    box-sizing: inherit;
+}
+
+/**SCROLL SNAP**/
+/* ESTO NOS PERMITE DEFINIR ZONAS DONDE EL SCROLL SE VA A DETENER
+ES MUY UTIL PARA PARTES DEFINIDAS DONDE QUEREMOS PONER EL FOCO*/
+.servicios, .nav_princ, .formulario{
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+body{ O QUE INCLUYAS EN EL BODY SE APLICA A TODO EL DO
+    font-size: 16px;
+-------LAS DOS LINEAS DE CÓDIGO ANTERIORES (%+PX) CONSIGUEN QUE LA CORRESPONDENCIA SEA
+        1REM = 10PX  ------
+    font-family: 'Krub', sans-serif;
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);
+}
+.contenedor{
+    max-width: 120rem;
+    /*margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+    ES COMO 
+        margin: 0 auto 0 auto;
+    ES COMO 
+    v  PORQUE SE REPITEN VALORES*/
+    margin: 0 auto;
+}
+
+.boton{
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 3rem;
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: .5rem;
+    width:90%;
+    text-align: center;
+    border: none; /* LO HEMOS PUESTO PARA EL ESTILO DE LOS INPUTS PORQUE LE HEMOS DADO CLASS .BOTON*/
+}
+
+@media (min-width: 480px) {
+    .boton{
+        width: auto;
+    }
+}
+/* CUANDO DAMOS ESTILO A UN INPUT PERDEMOS LA MANO DEL CURSOR
+    SE LA DEVOLVEMOS CON PROPIEDAD DE LA CLASE*/
+.boton:hover {
+    cursor:pointer;
+}
+
+.sombra {
+    /* 
+    ESTAS LINEAS CON SUS PREFIJOS SON PARA SOPORTE DE NAVEGADORES
+    NO SON NECESARIAS PERO HABRÍA QUE VERIFICAR EN ALGUNOS CASOS EL SOPORTE
+    EN ALGUNOS NAVEGADORES (CAN I USE)
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.54);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.48); */
+    box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.48);
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+/** TIPOGRAFIA **/
+h1{
+    font-size: 3.8rem;
+}
+
+h2{
+    font-size: 2.8rem;
+}
+
+h3{
+    font-size: 1.8rem;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+/** TITULOS **/
+h1 span{ /* SI PONEM H1 SPAN{} SÓLO APLICARA A LOS SPAN DE CADA H1*/
+    font-size: 2rem;
+}
+
+/** UTILIDADES **/
+
+.w-sm-100 {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .w-sm-100 {
+        width: auto;
+    } 
+}
+
+.alinear-derecha{
+    justify-content: flex-end;
+} 
+
+.util-flex{
+    display: flex;
+}
+/** NAVEGACION PRINCIPAL **/
+.nav-bg{
+    background-color: var(--secundario);
+}
+
+.nav_princ{
+    display: flex; /* POR DEFECTO flex-direction:row */
+    flex-direction: column;
+}
+@media (min-width: 768px) {
+    .nav_princ{
+        /*SE HEREDA TODO SÓLO PONDREMOS CAMBIOS*/
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+.nav_princ a{
+    color: var(--blanco);
+    text-align: center;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700; /* BOLD */
+    padding: 1rem; /* 1rem 1rem 1rem 1rem*/
+}
+.nav_princ a:hover{ /*TE COLOCAS SOBRE ELEMENTO*/
+    background-color: var(--primario);
+    color: var(--oscuro);
+}
+
+/** HERO **/
+.hero{
+    background-image: url(../img/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    position: relative; /*cuando quiero posicionar al hijo como absoluta*/
+    margin-bottom: 2rem;
+}
+
+.contenido-hero{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 100%;
+    /* si tiene padding funcionará mejor
+    bottom: 0;
+    left: 0;
+    top:0;
+    right:0;
+    */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-hero h2,
+.contenido-hero p {
+    color: var(--blanco);
+}
+.contenido-hero .ubicacion{
+    display: flex;
+    align-items: flex-end; 
+    /* ALINEACIÓN VERTICAL PORQUE NO HEMOS CAMBIADO flex-direction A COLUMN*/
+}
+
+/* SERVICIOS */
+@media (min-width: 768PX) {
+    .servicios{
+        display:grid;
+        /*
+        grid-template-columns: 33.3% 33.3% 33.3%;
+        ES IGUAL A 
+        grid-template-columns: 1fr 1fr 1fr;
+        y ES IGUAL A */
+        grid-template-columns: repeat(3, 1fr);
+         /*
+         grid-template-columns: 300PX 300PX;
+         grid-template-rows: 200PX 800PX;  
+         ES IGUAL A
+         grid: 200px 800px /300px 300px; /* rows/columns */
+         column-gap: 1rem;
+     }    
+}
+
+.servicio{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.servicio h3{
+    color: var(--secundario);
+    font-weight: normal;
+}
+
+.servicio p{
+    line-height: 2;
+    text-align: center;
+}
+
+.servicio .iconos {
+    height: 15rem;
+    width: 15rem;
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;/*recuerda solo con row*/
+    align-items: center;
+}
+
+/*contacto*/
+.formulario{
+    background-color: var(--grisaceo);
+    width: min(60rem, 100%); 
+    /** MIN ES COMO UNA FUNCIÓN QUE UTILIZA EL VALOR MÁS PEQUEÑO
+        CON ESTO TE AHORRAS ALGUNOS MEDIA QUERYS
+        NO FUNCIONA EN FIREFOX**/
+    margin: 0 auto;
+    /* CENTRA ORIZONTALMENTE
+    UTILIZAMOS "margin: 0 auto" EN UN ELEMENTO TIPO BLOCK 
+    CUYO PADRE NO ES UN DILPLAY FLEX */
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.formulario fieldset{
+    border: none;
+}
+
+.formulario legend{
+    text-align: center;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primario);
+}
+
+@media (min-width: 768px) {  
+    .contenedor-campos{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto 20rem;
+        column-gap: 1rem; /*separación de columnas*/
+    }
+    .campo:nth-child(3), 
+    .campo:nth-child(4){ 
+    /* nth-child selecciona instancia de la clase (sólo una)*/
+        grid-column: 1 / 3;
+
+    }
+}
+
+.campo{
+    margin-bottom: 1rem; 
+}
+
+.campo label{
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
+}
+
+.campo textarea{
+    height: 20rem;
+}
+
+
+/* FORMAS DIFERENTES DE MODIFICAR LOS INPUTS  CON SELECTORES
+
+.campo input[type="text"],
+.campo input[type="tel"]
+        background-color: red;
+
+    PERO PODEMOS CREAR UNA CLASE .input-text PARA TODOS
+*/
+.input-text{
+    width: 100%;
+    border: none; /* LOS INPUT TIENEN BORDE POR DEFECTO*/
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+/**FOOTER**/
+
+.footer{
+    text-align: center;
+}
+
